@@ -18,13 +18,15 @@ import top.theillusivec4.curios.api.SlotContext;
 public abstract class CursedScrollMixin extends ItemBaseCurio {
     @Inject(method = "canEquip", at = @At("HEAD"), cancellable = true, remap = false)
     private void canEquip(SlotContext context, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        if (super.canEquip(context, stack)) {
-            LivingEntity var4 = context.entity();
-            if (var4 instanceof Player player) {
-                if (ATAHelper2.hasBlessingScroll(player)) {
-                    cir.setReturnValue(false);
-                }
-            }
-        }
+        // 取消互斥条件，允许诅咒卷轴与祝福卷轴同时装备
+        // 原检查逻辑已移除，直接继承父类行为
+        // if (super.canEquip(context, stack)) {
+        //     LivingEntity var4 = context.entity();
+        //     if (var4 instanceof Player player) {
+        //         if (ATAHelper2.hasBlessingScroll(player)) {
+        //             cir.setReturnValue(false);
+        //         }
+        //     }
+        // }
     }
 }
